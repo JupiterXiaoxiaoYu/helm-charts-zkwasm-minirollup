@@ -9,6 +9,6 @@ entries:
     name: zkwasm-service
     type: application
     urls:
-    - zkwasm-service-0.1.1.tgz
-    version: 0.1.1
+    - zkwasm-service-0.1.2.tgz
+    version: 0.1.2
 generated: "2025-01-14T16:13:52.536000381+08:00"
