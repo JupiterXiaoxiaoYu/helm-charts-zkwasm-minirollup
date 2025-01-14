@@ -23,6 +23,8 @@ spec:
       containers:
       - name: merkleservice
         image: "{{ .Values.merkleservice.image.repository }}:{{ .Values.merkleservice.image.tag }}"
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do sleep 30; done"]  # 临时命令，用于调试
         ports:
         - containerPort: {{ .Values.merkleservice.port }}
         env:
