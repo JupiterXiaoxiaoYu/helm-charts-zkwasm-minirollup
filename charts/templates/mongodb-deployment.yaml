@@ -11,6 +11,8 @@ spec:
       labels:
         app: mongodb
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: ecs-f9de  # 替换为实际的节点名称
       containers:
       - name: mongodb
         image: "{{ .Values.mongodb.image.repository }}:{{ .Values.mongodb.image.tag }}"

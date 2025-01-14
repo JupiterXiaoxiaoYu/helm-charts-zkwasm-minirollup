@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Release.Name }}-mongodb-pv
+spec:
+  capacity:
+    storage: {{ .Values.mongodb.persistence.size }}
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: manual
+  hostPath:
+    path: /mnt/data/mongodb    # 确保这个目录在节点上存在
+    type: DirectoryOrCreate 
