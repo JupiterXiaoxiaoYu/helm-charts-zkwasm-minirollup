@@ -7,3 +7,6 @@ timeout: 1000  # 设置超时时间为 1000 秒（10分钟）
 
 # 可选的依赖配置
 dependencies: []
+
+annotations:
+  "helm.sh/hook-delete-policy": "before-hook-creation"
