@@ -10,5 +10,13 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: manual
   hostPath:
-    path: /mnt/data/mongodb    # 确保这个目录在节点上存在
-    type: DirectoryOrCreate 
+    path: /mnt/data/mongodb
+    type: DirectoryOrCreate
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - ecs-f9de    # 使用您的节点名称 
