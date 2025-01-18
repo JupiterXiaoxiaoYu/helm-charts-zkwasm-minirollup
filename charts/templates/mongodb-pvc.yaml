@@ -9,5 +9,5 @@ spec:
   resources:
     requests:
       storage: {{ .Values.mongodb.persistence.size }}
-  storageClassName: csi-disk
+  storageClassName: manual
 {{- end }}
