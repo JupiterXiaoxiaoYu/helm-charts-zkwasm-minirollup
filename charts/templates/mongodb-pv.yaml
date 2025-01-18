@@ -10,5 +10,5 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: manual
   hostPath:
-    path: /mnt/data/mongodb
+    path: /mnt/data/mongodb-{{ .Release.Name }}  # 为每个实例使用唯一的目录
     type: DirectoryOrCreate 
