@@ -6,8 +6,8 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: manual
   resources:
     requests:
       storage: {{ .Values.mongodb.persistence.size }}
+  storageClassName: csi-disk
 {{- end }}

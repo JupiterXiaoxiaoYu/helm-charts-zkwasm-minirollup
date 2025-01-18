@@ -8,15 +8,10 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: manual
-  hostPath:
-    path: /mnt/data/mongodb
-    type: DirectoryOrCreate
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: kubernetes.io/hostname
-          operator: In
-          values:
-          - ecs-f9de    # 使用您的节点名称 
+  storageClassName: csi-disk
+  csi:
+    driver: disk.csi.everest.io
+    fsType: ext4
+    volumeHandle: {{ .Values.mongodb.persistence.volumeHandle }}
+    volumeAttributes:
+      storage.kubernetes.io/csi-provisioner-identity: everest-csi-provisioner 
