@@ -14,9 +14,9 @@ spec:
       containers:
       - name: merkleservice
         image: "{{ .Values.merkleservice.image.repository }}:{{ .Values.merkleservice.image.tag }}"
-        command: ["./target/release/csm_service", "--uri", "{{ .Values.merkleservice.mongodbUri }}"]
+        command: ["./target/release/csm_service", "--uri", "mongodb://{{ .Release.Name }}-mongodb:27017"]
         ports:
         - containerPort: {{ .Values.merkleservice.port }}
         env:
         - name: URI
-          value: {{ .Values.merkleservice.mongodbUri }}
+          value: mongodb://{{ .Release.Name }}-mongodb:27017

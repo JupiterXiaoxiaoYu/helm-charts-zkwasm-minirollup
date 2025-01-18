@@ -127,7 +127,7 @@ merkleservice:
     repository: sinka2022/zkwasm-merkleservice
     tag: latest
   port: 3030
-  mongodbUri: "mongodb://mongodb:27017"
+  mongodbUri: "mongodb://{{ .Release.Name }}-mongodb:27017"
 
 redis:
   image:
