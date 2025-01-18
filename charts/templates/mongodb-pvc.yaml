@@ -10,4 +10,5 @@ spec:
     requests:
       storage: {{ .Values.mongodb.persistence.size }}
   storageClassName: manual
+  volumeName: {{ .Release.Name }}-mongodb-pv
 {{- end }}

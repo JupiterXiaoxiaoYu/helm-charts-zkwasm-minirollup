@@ -12,11 +12,11 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-merkleservice
+      app: merkleservice
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-merkleservice
+        app: merkleservice
         app.kubernetes.io/name: {{ include "zkwasm-service.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
