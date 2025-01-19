@@ -12,20 +12,26 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: merkleservice
+      app: {{ .Release.Name }}-merkleservice  # 修改这里
   template:
     metadata:
       labels:
-        app: merkleservice
+        app: {{ .Release.Name }}-merkleservice  # 修改这里
         app.kubernetes.io/name: {{ include "zkwasm-service.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       containers:
       - name: merkleservice
         image: "{{ .Values.merkleservice.image.repository }}:{{ .Values.merkleservice.image.tag }}"
-        command: ["./target/release/csm_service", "--uri", "mongodb://{{ .Release.Name }}-mongodb:27017"]
+        command: 
+          - "./target/release/csm_service"
+          - "--uri"
+          - "mongodb://{{ .Release.Name }}-mongodb:{{ .Values.mongodb.port }}"
         ports:
         - containerPort: {{ .Values.merkleservice.port }}
+          name: http
         env:
         - name: URI
-          value: mongodb://{{ .Release.Name }}-mongodb:27017
+          value: "mongodb://{{ .Release.Name }}-mongodb:{{ .Values.mongodb.port }}"
+        resources:
+          {{- toYaml .Values.merkleservice.resources | nindent 12 }}

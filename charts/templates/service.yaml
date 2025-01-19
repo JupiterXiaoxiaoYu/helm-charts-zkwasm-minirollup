@@ -1,34 +1,50 @@
+# Merkle Service
 apiVersion: v1
 kind: Service
 metadata:
-  name: merkleservice
+  name: {{ .Release.Name }}-merkleservice
+  labels:
+    app.kubernetes.io/name: merkleservice
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: service
 spec:
   selector:
-    app: merkleservice
+    app: {{ .Release.Name }}-merkleservice
   ports:
-  - port: {{ .Values.merkleservice.port }}
-    targetPort: {{ .Values.merkleservice.port }}
+    - port: {{ .Values.merkleservice.port }}
+      targetPort: {{ .Values.merkleservice.port }}
+      name: http
 ---
+# Redis Service
 apiVersion: v1
 kind: Service
 metadata:
-  name: redis
+  name: {{ .Release.Name }}-redis
+  labels:
+    app.kubernetes.io/name: redis
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: cache
 spec:
   selector:
-    app: redis
+    app: {{ .Release.Name }}-redis
   ports:
-  - port: {{ .Values.redis.port }}
-    targetPort: {{ .Values.redis.port }}
+    - port: {{ .Values.redis.port }}
+      targetPort: {{ .Values.redis.port }}
+      name: redis
 ---
+# MongoDB Service
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongodb
+  name: {{ .Release.Name }}-mongodb
+  labels:
+    app.kubernetes.io/name: mongodb
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: database
 spec:
   selector:
-    app: mongodb
+    app: {{ .Release.Name }}-mongodb
   ports:
-  - port: {{ .Values.mongodb.port }}
-    targetPort: {{ .Values.mongodb.port }}
-
-    
+    - port: {{ .Values.mongodb.port }}
+      targetPort: {{ .Values.mongodb.port }}
+      name: mongodb

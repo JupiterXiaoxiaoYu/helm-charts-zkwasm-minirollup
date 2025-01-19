@@ -2,17 +2,27 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}-redis
+  labels:
+    app.kubernetes.io/name: redis
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: cache
 spec:
   selector:
     matchLabels:
-      app: redis
+      app: {{ .Release.Name }}-redis  # 修改这里
   template:
     metadata:
       labels:
-        app: redis
+        app: {{ .Release.Name }}-redis  # 修改这里
+        app.kubernetes.io/name: redis
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/component: cache
     spec:
       containers:
       - name: redis
         image: "{{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}"
         ports:
         - containerPort: {{ .Values.redis.port }}
+          name: redis
+        resources:
+          {{- toYaml .Values.redis.resources | nindent 12 }}
