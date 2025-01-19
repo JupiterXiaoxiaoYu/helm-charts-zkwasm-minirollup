@@ -6,10 +6,12 @@ metadata:
     app.kubernetes.io/name: mongodb
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/component: database
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: {{ include "zkwasm-service.chart" . }}
   annotations:
     meta.helm.sh/release-name: {{ .Release.Name }}
     meta.helm.sh/release-namespace: {{ .Release.Namespace }}
+    helm.sh/resource-policy: keep
 spec:
   capacity:
     storage: {{ .Values.mongodb.persistence.size }}
